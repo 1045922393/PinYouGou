@@ -1,4 +1,4 @@
-$(function () {
+$(() => {
 
 
   let jsonStr = localStorage.getItem('myshopcar');
@@ -7,11 +7,9 @@ $(function () {
   if (sqlArr.length == 0) {                 //判断本地数据库是否为空
     $('.cart-header').addClass('hidden');     //将该有的显示,不该有的隐藏
     $('.item-list').addClass('hidden');
-    $('.empty-tip').show();       //将该有的显示,不该有的隐藏
-    $('.total-of').addClass('hidden');
     PYG.littleCar();
   } else {
-    $('.empty-tip').hide();       //将该有的显示,不该有的隐藏
+    $('.empty-tip').addClass('hidden');       //将该有的显示,不该有的隐藏
     $('.total-of').removeClass('hidden');
     PYG.littleCar();
     let html = '';                              //将本地数据库的数组转化为结构输出
@@ -122,56 +120,24 @@ $(function () {
     })
 
     //删除功能
-    // $('.item-list').on('click', '.item-del', function () {
-    //   let productID = $(this).parents('.item').attr('data-id');
-    //   $(this).parents('.item').remove();
-    //   let obj = sqlArr.find(function (e) {
-    //     return e.pID == productID
-    //   })
-    //   let delIndex = sqlArr.indexOf(obj);             //数组.indexOf(元素)    返回一个对应的数字类型索引
-    //   sqlArr.splice(delIndex, 1);
-    //   let jsonString = JSON.stringify(sqlArr);
-    //   localStorage.setItem('myshopcar', jsonString);
-    //   PYG.littleCar();
-    //   if (sqlArr.length == 0) {                 //判断本地数据库是否为空
-    //     $('.cart-header').addClass('hidden');     //将该有的显示,不该有的隐藏
-    //     $('.item-list').addClass('hidden');
-    //     $('.empty-tip').removeClass('hidden');       //将该有的显示,不该有的隐藏
-    //     $('.total-of').addClass('hidden');
-    //   }
-    // })
     $('.item-list').on('click', '.item-del', function () {
-      let delBtn = this;// 这是一个习惯
-      $("#dialog-confirm").dialog({
-        resizable: false,
-        height: 140,
-        modal: true,
-        buttons: {
-          "确认": function () {
-            $(this).dialog("close");
-            let productID = $(delBtn).parents('.item').attr('data-id');
-            $(delBtn).parents('.item').remove();
-            let obj = sqlArr.find(function (e) {
-              return e.pID == productID
-            })
-            let delIndex = sqlArr.indexOf(obj);             //数组.indexOf(元素)    返回一个对应的数字类型索引
-            sqlArr.splice(delIndex, 1);
-            let jsonString = JSON.stringify(sqlArr);
-            localStorage.setItem('myshopcar', jsonString);
-            PYG.littleCar();
-            if (sqlArr.length == 0) {                 //判断本地数据库是否为空
-              $('.cart-header').addClass('hidden');     //将该有的显示,不该有的隐藏
-              $('.item-list').addClass('hidden');
-              $('.empty-tip').show();       //将该有的显示,不该有的隐藏
-              $('.total-of').addClass('hidden');
-            }
-          },
-          "取消": function () {
-            $(this).dialog("close");
-          }
-        }
-      });
-    });
+      let productID = $(this).parents('.item').attr('data-id');
+      $(this).parents('.item').remove();
+      let obj = sqlArr.find(function (e) {
+        return e.pID == productID
+      })
+      let delIndex = sqlArr.indexOf(obj);             //数组.indexOf(元素)    返回一个对应的数字类型索引
+      sqlArr.splice(delIndex, 1);
+      let jsonString = JSON.stringify(sqlArr);
+      localStorage.setItem('myshopcar', jsonString);
+      PYG.littleCar();
+      if (sqlArr.length == 0) {                 //判断本地数据库是否为空
+        $('.cart-header').addClass('hidden');     //将该有的显示,不该有的隐藏
+        $('.item-list').addClass('hidden');
+        $('.empty-tip').removeClass('hidden');       //将该有的显示,不该有的隐藏
+        $('.total-of').addClass('hidden');
+      }
+    })
   }
 
 
