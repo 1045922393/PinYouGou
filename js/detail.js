@@ -1,4 +1,6 @@
 $(function () {
+  PYG.littleCar();
+
   let id = location.search;
   // console.log(location)
   id = parseInt(id.slice(4));

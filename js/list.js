@@ -1,4 +1,6 @@
 $(function () {
+  PYG.littleCar();
+
   phoneData.forEach(function (e) {
     let everyGood = ` <li class="goods-list-item">
     <a href="detail.html?id=${e.pID}">

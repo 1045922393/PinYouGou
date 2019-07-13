@@ -7,9 +7,11 @@ $(() => {
   if (sqlArr.length == 0) {                 //判断本地数据库是否为空
     $('.cart-header').addClass('hidden');     //将该有的显示,不该有的隐藏
     $('.item-list').addClass('hidden');
+    PYG.littleCar();
   } else {
     $('.empty-tip').addClass('hidden');       //将该有的显示,不该有的隐藏
     $('.total-of').removeClass('hidden');
+    PYG.littleCar();
     let html = '';                              //将本地数据库的数组转化为结构输出
     sqlArr.forEach(function (e) {                 //遍历数组
       html += `<div class="item" data-id=${e.pID}>
@@ -90,6 +92,7 @@ $(() => {
       let jsonString = JSON.stringify(sqlArr);
       localStorage.setItem('myshopcar', jsonString);
       computting();
+      PYG.littleCar();
     })
 
     $('.item-list').on('click', '.reduce', function () {
@@ -113,6 +116,7 @@ $(() => {
       let jsonString = JSON.stringify(sqlArr);
       localStorage.setItem('myshopcar', jsonString);
       computting();
+      PYG.littleCar();
     })
     $('.item-list').on('click', '.item-del', function () {
       let productID = $(this).parents('.item').attr('data-id');
@@ -124,6 +128,7 @@ $(() => {
       sqlArr.splice(delIndex, 1);
       let jsonString = JSON.stringify(sqlArr);
       localStorage.setItem('myshopcar', jsonString);
+      PYG.littleCar();
       if (sqlArr.length == 0) {                 //判断本地数据库是否为空
         $('.cart-header').addClass('hidden');     //将该有的显示,不该有的隐藏
         $('.item-list').addClass('hidden');
