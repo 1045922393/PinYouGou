@@ -114,6 +114,23 @@ $(() => {
       localStorage.setItem('myshopcar', jsonString);
       computting();
     })
+    $('.item-list').on('click', '.item-del', function () {
+      let productID = $(this).parents('.item').attr('data-id');
+      $(this).parents('.item').remove();
+      let obj = sqlArr.find(function (e) {
+        return e.pID == productID
+      })
+      let delIndex = sqlArr.indexOf(obj);             //数组.indexOf(元素)    返回一个对应的数字类型索引
+      sqlArr.splice(delIndex, 1);
+      let jsonString = JSON.stringify(sqlArr);
+      localStorage.setItem('myshopcar', jsonString);
+      if (sqlArr.length == 0) {                 //判断本地数据库是否为空
+        $('.cart-header').addClass('hidden');     //将该有的显示,不该有的隐藏
+        $('.item-list').addClass('hidden');
+        $('.empty-tip').removeClass('hidden');       //将该有的显示,不该有的隐藏
+        $('.total-of').addClass('hidden');
+      }
+    })
   }
   function computting() {                   //封装计算总和
     let selectedCount = 0;
